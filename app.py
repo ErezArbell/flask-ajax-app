@@ -6,14 +6,15 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/printname', methods=['POST'])
-def printname():
-    firstname = request.form['firstname']
-    lastname = request.form['lastname']
-    output = firstname + lastname
-    if firstname and lastname:
-        return jsonify({'output':'Your Name is ' + output + ', right?'})
-    return jsonify({'error' : 'Missing data!'}), 400
+@app.route('/add_numbers', methods=['POST'])
+def add_numbers():
+    try:
+        firstnumber = int(request.form['firstnumber'])
+        secondnumber = int(request.form['secondnumber'])
+    except:
+        return jsonify({'error' : 'Bad data!'}), 400
+    sum = firstnumber + secondnumber
+    return jsonify({'output':'The sum is %d' % sum})
 
 @app.route("/ping", methods=["GET"])
 def ping():

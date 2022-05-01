@@ -3,38 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJAX Form Sample</title>
+    <title>Add numbers</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
 
-    <h1>AJAX Form Sample</h1>
+    <h1>Add Integers</h1>
 
     <form id="form">
-        <h2>First Name</h2>
-        <input type="text" id="firstname">
-        <h2>Last Name</h2>
-        <input type="text" id="lastname">
-        <button type="submit" name="button">Submit</button>
+        <input type="text" size=5 id="firstnumber">
+        +
+        <input type="text" size=5 id="secondnumber">
+        <button type="submit" name="button">Add</button>
     </form>
-    
-    <div id="error" style="color: red;"></div>
+
     <div id="output"></div>
+    <div id="error" style="color: red;"></div>
 
 
     <script type="text/javascript">
     $(document).ready(function() {
         console.log("Hello");
         $('#form').on('submit',function(e){
+            $('#output').text('').hide();
             $('#error').text('').hide();
             $.ajax({
                 data: {
-                    firstname: $('#firstname').val(),
-                    lastname: $('#lastname').val(),
+                    firstnumber: $('#firstnumber').val(),
+                    secondnumber: $('#secondnumber').val(),
                 },
                 type: 'POST',
-                url: 'printname',
+                url: 'add_numbers',
                 error: function(data){
                     $('#error').text("Error: " + data.responseJSON.error).show();
                 },
